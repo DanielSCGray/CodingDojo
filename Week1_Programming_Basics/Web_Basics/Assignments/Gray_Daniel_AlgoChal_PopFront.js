@@ -6,3 +6,5 @@ function popFront(arr) {
     arr.pop()
     return front 
 }
+
+console.log(popFront([900,1,2,3,4]))
