@@ -10,17 +10,20 @@
     <div class="header">
         <h1 class="whiteText">DojoWeather</h1>
         <div class="cities">
-            <h3>Burbank</h3>
-            <h3>Chicago</h3>
-            <h3>Dallas</h3>
+            <h3 class="header-city" onclick="alert('Loading weather report...')">Burbank</h3>
+            <h3 class="header-city" onclick="alert('Loading weather report...')">Chicago</h3>
+            <h3 class="header-city" onclick="alert('Loading weather report...')">Dallas</h3>
         </div>
     </div>
     <div class="main">
-        <div class="box1">
+        <div class="top">
             <h2>San Jose</h2>
-            <p>show temperature in: </p>
+            <div class="tempbox">
+                <p>show temperature in: </p>
+                <!-- selector goes here -->
+            </div>
         </div>
-        <div class="box2">
+        <div class="mid">
             <div class="weather">
                 <h3>Day</h3>
                 <img class="circle" src="" alt="">
@@ -31,8 +34,13 @@
                 </div>
             </div>
         </div>
-        <div class="box3">
-
+        <div class="bot">
+            <img class="cookie" src="assets/cookie.png" alt="">
+            <div class="cookie-text">
+                <h3>Stop! Cookie time</h3>
+                <p>We use cookies (sadly not the edible ones) to personalize content and ads, to provide social media features and to analyse our traffic. <span class="blue-under">Read more...</span></p>
+            </div>
+            <button class="Accept-button" onclick="this.remove()">I Accept</button>
         </div>
     </div>
 </body>
