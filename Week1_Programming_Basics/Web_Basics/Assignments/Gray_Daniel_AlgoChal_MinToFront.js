@@ -19,3 +19,7 @@ function minToFront(arr) {
 var testArr = [5, 93, 22, 4, 1]
 
 console.log(minToFront(testArr))
+
+var testArr2 = [5, 93, -18, 22, 4, 1]
+
+console.log(minToFront(testArr2))

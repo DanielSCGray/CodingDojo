@@ -7,4 +7,6 @@ function popFront(arr) {
     return front 
 }
 
-console.log(popFront([900,1,2,3,4]))
+var test = [900,1,2,3,4]
+console.log(popFront(test))
+console.log(test)
