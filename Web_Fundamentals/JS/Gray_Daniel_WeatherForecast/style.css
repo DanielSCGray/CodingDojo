@@ -9,7 +9,7 @@ body, div {
 /* HEADER  */
 .header {
     color: aliceblue;
-    background-color: skyblue;
+    background-color: rgb(159,197,248);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -31,11 +31,52 @@ body, div {
     display: flex;
     justify-content: space-between;
     border-bottom: black solid;
+    align-items: center;
 }
 .mid {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
+.weather {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(238,238,238);
+    padding: 0px 10px;
+}
+.circle {
+    border-radius: 50%;
+    height: 100px;
+}
+.hilo {
+    display: flex;
+    justify-content: space-between;
+    width: 75px;
+}
+.red {
+    color: red;
+}
+.blue {
+    color: blue;
+}
+/* BOT */
+.bot {
+    background-color: rgb(238,238,238);
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+.bot img {
+    height: 70px;
+    margin-right: 10px;
+}
+.bot h3, .bot p {
+    margin: 0px;
+}
+.bot button {
+    margin: 0px 10px;
+    width: 200px;
+    background-color: rgb(159,197,248);
+}
 
