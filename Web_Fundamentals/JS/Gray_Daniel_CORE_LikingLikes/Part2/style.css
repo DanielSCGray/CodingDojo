@@ -1,0 +1,53 @@
+
+.header {
+    background-color: black;
+    color: aliceblue;
+    margin: 0px 70px;
+}
+.title {
+    display: flex;
+    justify-content: center;
+    margin: 0px 70px;
+}
+.main {
+    display: flex;
+    margin: 0px 70px;
+}
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: black solid;
+    margin-right: 20px;
+    padding: 10px;
+}
+.profile img {
+    height: 50px;
+}
+.blue-under {
+    text-decoration: underline;
+    color: rgb(13,86,150);
+}
+/* USERBOXES */
+.userbox {
+    border: black solid;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.usertop {
+    display: flex;
+    justify-content: space-between;
+}
+.usertop div {
+    display: flex;
+    justify-content: space-around;
+    width: 150px;
+    align-items: center;
+}
+.likebutton {
+    box-shadow: 3px 3px black;
+    border: black solid;
+    background-color: rgb(255,217,102);
+    width: 50px;
+    height: 30px;
+}
