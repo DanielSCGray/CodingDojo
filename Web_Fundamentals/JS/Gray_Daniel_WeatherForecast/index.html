@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Forecast</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <div class="header">
@@ -25,49 +26,49 @@
         </div>
         <div class="mid">
             <div class="weather">
-                <h3>Day</h3>
+                <h3>Today</h3>
                 <img class="circle" src="assets/some_rain.png" alt="">
-                <p>some</p>
+                <p>some rain</p>
                 <div class="hilo">
-                    <h3 class="red">#⁰</h3>
-                    <h3 class="blue">#2⁰</h3>
+                    <h3 class="red">24⁰</h3>
+                    <h3 class="blue">18⁰</h3>
                 </div>
             </div>
             <div class="weather">
-                <h3>Day</h3>
+                <h3>Tomorrow</h3>
                 <img class="circle" src="assets/some_sun.png" alt="">
-                <p>some</p>
+                <p>some sun</p>
                 <div class="hilo">
-                    <h3 class="red">#⁰</h3>
-                    <h3 class="blue">#2⁰</h3>
+                    <h3 class="red">27⁰</h3>
+                    <h3 class="blue">19⁰</h3>
                 </div>
             </div>
             <div class="weather">
-                <h3>Day</h3>
+                <h3>Friday</h3>
                 <img class="circle" src="assets/some_clouds.png" alt="">
-                <p>some</p>
+                <p>some clouds</p>
                 <div class="hilo">
-                    <h3 class="red">#⁰</h3>
-                    <h3 class="blue">#2⁰</h3>
+                    <h3 class="red">21⁰</h3>
+                    <h3 class="blue">16⁰</h3>
                 </div>
             </div>
             <div class="weather">
-                <h3>Day</h3>
+                <h3>Saturday</h3>
                 <img class="circle" src="assets/some_sun.png" alt="">
-                <p>some</p>
+                <p>some sun</p>
                 <div class="hilo">
-                    <h3 class="red">#⁰</h3>
-                    <h3 class="blue">#2⁰</h3>
+                    <h3 class="red">26⁰</h3>
+                    <h3 class="blue">21⁰</h3>
                 </div>
             </div>
         </div>
-        <div class="bot">
+        <div id="cookiePolicy" class="bot">
             <img class="cookie" src="assets/cookie.png" alt="">
             <div class="cookie-text">
                 <h3>Stop! Cookie time</h3>
                 <p>We use cookies (sadly not the edible ones) to personalize content and ads, to provide social media features and to analyse our traffic. <span class="blue-under">Read more...</span></p>
             </div>
-            <button class="Accept-button" onclick="this.remove()">I Accept</button>
+            <button class="Accept-button" onclick="remove('#cookiePolicy')">I Accept</button>
         </div>
     </div>
 </body>

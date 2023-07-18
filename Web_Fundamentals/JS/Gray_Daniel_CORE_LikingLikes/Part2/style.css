@@ -1,4 +1,6 @@
-
+* {
+    font-family: cursive;
+}
 .header {
     background-color: black;
     color: aliceblue;

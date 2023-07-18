@@ -26,6 +26,7 @@ body, div {
 /* MAIN */
 .main {
     margin: 0px 70px;
+    min-height: 600px;
 }
 .top {
     display: flex;
@@ -47,7 +48,7 @@ body, div {
 }
 .circle {
     border-radius: 50%;
-    height: 100px;
+    height: 150px;
 }
 .hilo {
     display: flex;
@@ -66,6 +67,10 @@ body, div {
     display: flex;
     align-items: center;
     margin-top: 5px;
+    margin-right: 70px;
+    position: fixed;
+    bottom: 0px;
+    border: black solid;
 }
 .bot img {
     height: 70px;
