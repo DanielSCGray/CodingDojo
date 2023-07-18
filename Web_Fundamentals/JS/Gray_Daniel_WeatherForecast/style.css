@@ -11,13 +11,17 @@ body, div {
     color: aliceblue;
     background-color: rgb(159,197,248);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+}
+.header h1 {
+    margin: 20px 70px;
 }
 .cities {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin: 20px 90px;
 }
 .header-city {
     margin: auto 10px;
@@ -33,6 +37,13 @@ body, div {
     justify-content: space-between;
     border-bottom: black solid;
     align-items: center;
+}
+.tempbox {
+    display: flex;
+    gap: 20px;
+}
+.tempbox p{
+    margin: 5px;
 }
 .mid {
     display: flex;
