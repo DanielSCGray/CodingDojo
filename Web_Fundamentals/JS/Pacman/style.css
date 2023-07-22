@@ -1,5 +1,9 @@
+
 body {
     background-color: black;
+}
+.row {
+    height: 38px;
 }
 .row div{
     height: 38px;
@@ -14,10 +18,12 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
-.pacman {
+#pacman {
     background-image: url(images/pacman.gif);
     background-position: center;
     background-repeat: no-repeat;
+    height: 38px;
+    width: 38px;
 }
 .empty {
     background-color: black;
