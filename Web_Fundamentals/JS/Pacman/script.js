@@ -4,7 +4,7 @@ var world = [
     [2, 1, 1, 1, 1, 1, 1, 1, 1, 2],
     [2, 1, 1, 1, 1, 1, 1, 1, 1, 2],
     [2, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-    [2, 1, 1, 1, 1, 1, 1, 1, 1, 2],
+    [2, 1, 3, 1, 1, 1, 1, 1, 1, 2],
     [2, 1, 1, 1, 1, 1, 1, 1, 1, 2],
     [2, 1, 1, 1, 1, 1, 1, 1, 1, 2],
     [2, 1, 1, 1, 1, 1, 1, 1, 1, 2],
@@ -30,6 +30,9 @@ function displayWorld() {
             if(world[i][j] === 0){
                 output += "<div class='empty'></div>"
             }
+            if(world[i][j] === 3){
+                output += "<div class='cherry'></div>"
+            }
         }
         output += "\n</div>"
     }
@@ -40,9 +43,17 @@ function displayPacman(){
     document.getElementById('pacman').style.top = pacman.y*40+'px';
     document.getElementById('pacman').style.left = pacman.x*40+'px';
 }
+var score = document.getElementById('score')
+function updateScore(val){
+    var newScore = Number(score.innerText) + val
+    score.innerText = newScore
+    // console.log(score)
+}
 
 displayWorld()
 displayPacman()
+
+
 
 document.onkeydown = function(e){
     console.log(e.key)
@@ -77,6 +88,12 @@ document.onkeydown = function(e){
 
     if (world[pacman.y][pacman.x] === 1){
         world[pacman.y][pacman.x] = 0;
+        updateScore(1);
+        displayWorld();
+    }
+    else if (world[pacman.y][pacman.x] === 3){
+        world[pacman.y][pacman.x] = 0;
+        updateScore(50);
         displayWorld();
     }
     // console.log(world[pacman.y][pacman.x])
