@@ -1,13 +1,14 @@
 
 body {
     background-color: black;
+    margin: 0px;
 }
 .row {
-    height: 38px;
+    height: 40px;
 }
 .row div{
-    height: 38px;
-    width: 38px;
+    height: 40px;
+    width: 40px;
     display: inline-block;
 }
 .brick {
@@ -22,8 +23,10 @@ body {
     background-image: url(images/pacman.gif);
     background-position: center;
     background-repeat: no-repeat;
-    height: 38px;
-    width: 38px;
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    transform: rotate(0);
 }
 .empty {
     background-color: black;
