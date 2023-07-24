@@ -28,7 +28,9 @@ var pacman = {
 }
 var redGhost = {
     x: 9,
-    y: 9
+    y: 9,
+    name: 'Red Ghost',
+    difficulty: 1
 }
 
 function displayWorld() {
@@ -76,35 +78,49 @@ displayPacman()
 displayGhost()
 
 // GHOST MOVEMENT 
-function ghostMoveRandom(){
+// function ghostMoveRandom(){
+//     var directionArray = ['down', 'up', 'right', 'left']
+//     var direction = directionArray[Math.floor(Math.random()*4)]
+//     if (direction === 'down') {
+//         redGhost.y++;
+//         if(world[redGhost.y][redGhost.x] === 2){
+//             redGhost.y--
+//         }
+//     }
+//     if (direction === 'up') {
+//         redGhost.y--;
+//         if(world[redGhost.y][redGhost.x] === 2){
+//             redGhost.y++
+//         }
+//     }
+//     if (direction === 'right') {
+//         redGhost.x++;
+//         if(world[redGhost.y][redGhost.x] === 2){
+//             redGhost.x--
+//         }
+//     }
+//     if (direction === 'left') {
+//         redGhost.x--;
+//         if(world[redGhost.y][redGhost.x] === 2){
+//             redGhost.x++
+//         }
+//     }
+//     console.log('ghost moves ' + direction)
+// }
+
+function buildRandomDirections(){
     var directionArray = ['down', 'up', 'right', 'left']
-    var direction = directionArray[Math.floor(Math.random()*4)]
-    if (direction === 'down') {
-        redGhost.y++;
-        if(world[redGhost.y][redGhost.x] === 2){
-            redGhost.y--
+    var randomDirections = []
+    while (randomDirections.length < 4) {
+        var randomI = Math.floor(Math.random()*4)
+        if (directionArray[randomI]) {
+            randomDirections.push(directionArray[randomI]);
+            directionArray[randomI] = 0;
         }
     }
-    if (direction === 'up') {
-        redGhost.y--;
-        if(world[redGhost.y][redGhost.x] === 2){
-            redGhost.y++
-        }
-    }
-    if (direction === 'right') {
-        redGhost.x++;
-        if(world[redGhost.y][redGhost.x] === 2){
-            redGhost.x--
-        }
-    }
-    if (direction === 'left') {
-        redGhost.x--;
-        if(world[redGhost.y][redGhost.x] === 2){
-            redGhost.x++
-        }
-    }
-    console.log('ghost moves ' + direction)
+    return randomDirections
 }
+console.log(buildRandomDirections())
 
 function buildSmartDirections(ghost){
     var smartDirectionArray = []
@@ -167,6 +183,33 @@ function buildSmartDirections(ghost){
     console.log(smartDirectionArray)
     return smartDirectionArray;
 }
+
+function randomGhostMove(ghost){
+    var directions = buildRandomDirections()
+    for (var i =0; i<directions.length; i++){
+        if(directions[i] === 'down' && world[ghost.y+1][ghost.x] !== 2){
+            ghost.y++;
+            console.log(ghost.name + ' randomly moves ' + directions[i])
+            return
+        }
+        else if(directions[i] === 'up' && world[ghost.y-1][ghost.x] !== 2){
+            ghost.y--;
+            console.log(ghost.name + ' randomly moves ' + directions[i])
+            return
+        }
+        else if(directions[i] === 'right' && world[ghost.y][ghost.x+1] !== 2){
+            ghost.x++;
+            console.log(ghost.name + ' randomly moves ' + directions[i])
+            return
+        }
+        else if(directions[i] === 'left' && world[ghost.y][ghost.x-1] !== 2){
+            ghost.x--;
+            console.log(ghost.name + ' randomly moves ' + directions[i])
+            return
+        }
+    }
+}
+
 function smartGhostMove(ghost){
     var directionArr = buildSmartDirections(ghost);
     for (i=0; i<directionArr.length;i++){
@@ -192,6 +235,16 @@ function smartGhostMove(ghost){
             return
         }
     }
+}
+function ghostMove(ghost){
+    var chance = Math.ceil(Math.random()*(ghost.difficulty *5))
+    if(chance > 4){
+        smartGhostMove(ghost)
+    }
+    else {
+        randomGhostMove(ghost);
+    }
+    return
 }
 
 document.onkeydown = function(e){
@@ -238,7 +291,9 @@ document.onkeydown = function(e){
     // console.log(world[pacman.y][pacman.x])
     // console.log(pacman.y)
     // ghostMoveRandom();
-    smartGhostMove(redGhost);
+    // smartGhostMove(redGhost);
+    // randomGhostMove(redGhost);
+    ghostMove(redGhost);
     displayGhost();
     displayPacman();
 
