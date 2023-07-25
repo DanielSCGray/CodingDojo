@@ -38,7 +38,10 @@ function countPoints(worldArray){
     }
     return sum
 }
+
 var totalPoints = countPoints(world)
+// var totalPoints = 2;
+
 console.log(totalPoints);
 //CHARACTERS
 var pacman = {
@@ -126,13 +129,18 @@ function displayGhost(ghost){
     document.getElementById(ghost.name).style.left = ghost.x*40+'px';
 }
 
+var winScreen = document.getElementById('win-screen')
 
 var score = document.getElementById('score')
 function updateScore(val){
     var newScore = Number(score.innerText) + val;
     score.innerText = newScore;
     if(newScore === totalPoints){
-        alert('YOU WIN')
+        winScreen.style.display = 'block';
+        clearInterval(redGhostMovement);
+        clearInterval(tealGhostMovement);
+        clearInterval(yellowGhostMovement);
+        clearInterval(skullGhostMovement);
     }
 
     // console.log(score)
@@ -304,6 +312,8 @@ function smartGhostMove(ghost){
         }
     }
 }
+var gameOverScreen = document.getElementById('game-over-screen')
+
 function ghostMove(ghost){
     var chance = Math.ceil(Math.random()*(ghost.difficulty *5))
     if(chance > 4){
@@ -314,7 +324,11 @@ function ghostMove(ghost){
     }
     displayGhost(ghost);
     if (ghost.x === pacman.x && ghost.y === pacman.y){
-        alert('GAME OVER')
+        gameOverScreen.style.display = 'block';
+        clearInterval(redGhostMovement);
+        clearInterval(tealGhostMovement);
+        clearInterval(yellowGhostMovement);
+        clearInterval(skullGhostMovement);
     }
     return
 }
@@ -392,6 +406,18 @@ document.onkeydown = function(e){
 
     displayPacman();
 
+    for (var i = 0; i < ghostArray.length; i++){
+        var cycleGhost = ghostArray[i];
+        if (cycleGhost.x === pacman.x && cycleGhost.y === pacman.y){
+            gameOverScreen.style.display = 'block';
+            clearInterval(redGhostMovement);
+            clearInterval(tealGhostMovement);
+            clearInterval(yellowGhostMovement);
+            clearInterval(skullGhostMovement);
+        }
+    }
+
+
     // for (var i = 0; i < ghostArray.length; i++){
     //     if(ghostArray[i].x === pacman.x && ghostArray[i].y === pacman.y){
     //         alert('GAME OVER. Refresh to try again')
@@ -400,6 +426,8 @@ document.onkeydown = function(e){
 }
 
 
-    // setInterval(ghostMove(redGhost), 1000);
-    // setInterval(displayRedGhost(), 1000)
+    // var redGhostMovement = setInterval(ghostMove, 500, redGhost);
+    // var tealGhostMovement = setInterval(ghostMove, 500, tealGhost);
+    // var yellowGhostMovement = setInterval(ghostMove, 500, yellowGhost);
+    // var skullGhostMovement = setInterval(ghostMove, 500, skullGhost);
 
