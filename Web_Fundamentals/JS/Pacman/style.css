@@ -52,3 +52,27 @@ body {
     width: 40px;
     position: absolute;
 }
+#tealghost {
+    background-image: url(images/tealGhost.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 40px;
+    position: absolute;
+}
+#yellowghost {
+    background-image: url(images/yellowGhost.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 40px;
+    position: absolute;
+}
+#skullghost {
+    background-image: url(images/skull.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 40px;
+    position: absolute;
+}

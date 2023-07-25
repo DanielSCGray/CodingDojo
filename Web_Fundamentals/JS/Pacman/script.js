@@ -8,8 +8,8 @@ var world = [
     [2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 2, 2, 2, 2, 1, 2, 1, 2, 1, 2],
     [2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2],
     [2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, 1, 2],
-    [2, 1, 2, 1, 2, 1, 2, 1, 2, 0, 2, 1, 1, 1, 1, 2, 1, 2, 1, 2],
-    [2, 1, 2, 1, 1, 1, 2, 1, 2, 2, 2, 1, 2, 2, 1, 2, 1, 2, 1, 2],
+    [2, 1, 2, 1, 2, 1, 2, 1, 2, 0, 0, 0, 0, 2, 1, 2, 1, 2, 1, 2],
+    [2, 1, 2, 1, 1, 1, 2, 1, 2, 2, 2, 2, 2, 2, 1, 2, 1, 2, 1, 2],
     [2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2],
     [2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 2],
     [2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 1, 1, 2, 1, 2],
@@ -19,9 +19,9 @@ var world = [
     [2, 1, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 1, 2],
     [2, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
     [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-
 ]
 
+//CHARACTERS
 var pacman = {
     x: 1,
     y: 1
@@ -32,7 +32,24 @@ var redGhost = {
     name: 'Red Ghost',
     difficulty: 1
 }
-
+var tealGhost = {
+    x: 10,
+    y: 9,
+    name: 'Teal Ghost',
+    difficulty: 2
+}
+var yellowGhost = {
+    x: 11,
+    y: 9,
+    name: 'Yellow Ghost',
+    difficulty: 4
+}
+var skullGhost = {
+    x: 12,
+    y: 9,
+    name: 'Skull Ghost',
+    difficulty: 100
+}
 function displayWorld() {
     var output = ''
     for(var i =0; i<world.length; i++){
@@ -61,9 +78,21 @@ function displayPacman(){
     document.getElementById('pacman').style.left = pacman.x*40+'px';
 }
 
-function displayGhost(){
+function displayRedGhost(){
     document.getElementById('redghost').style.top = redGhost.y*40+'px';
     document.getElementById('redghost').style.left = redGhost.x*40+'px';
+}
+function displayTealGhost(){
+    document.getElementById('tealghost').style.top = tealGhost.y*40+'px';
+    document.getElementById('tealghost').style.left = tealGhost.x*40+'px';
+}
+function displayYellowGhost(){
+    document.getElementById('yellowghost').style.top = yellowGhost.y*40+'px';
+    document.getElementById('yellowghost').style.left = yellowGhost.x*40+'px';
+}
+function displaySkullGhost(){
+    document.getElementById('skullghost').style.top = skullGhost.y*40+'px';
+    document.getElementById('skullghost').style.left = skullGhost.x*40+'px';
 }
 
 var score = document.getElementById('score')
@@ -75,7 +104,10 @@ function updateScore(val){
 
 displayWorld()
 displayPacman()
-displayGhost()
+displayRedGhost()
+displayTealGhost()
+displayYellowGhost()
+displaySkullGhost()
 
 // GHOST MOVEMENT 
 // function ghostMoveRandom(){
@@ -294,7 +326,18 @@ document.onkeydown = function(e){
     // smartGhostMove(redGhost);
     // randomGhostMove(redGhost);
     ghostMove(redGhost);
-    displayGhost();
+    displayRedGhost();
+
+    ghostMove(tealGhost);
+    displayTealGhost();
+
+    ghostMove(yellowGhost);
+    displayYellowGhost();
+
+    ghostMove(skullGhost);
+    displaySkullGhost();
+
+
     displayPacman();
 
 }
