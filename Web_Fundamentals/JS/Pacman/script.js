@@ -1,9 +1,9 @@
 var world = [
     [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-    [2, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
+    [2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 2],
     [2, 1, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 1, 2, 2, 1, 2],
     [2, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2],
-    [2, 1, 1, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2],
+    [2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2],
     [2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2],
     [2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 2, 2, 2, 2, 1, 2, 1, 2, 1, 2],
     [2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2],
@@ -13,11 +13,11 @@ var world = [
     [2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2],
     [2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 2],
     [2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 1, 1, 2, 1, 2],
-    [2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 3, 1, 1, 2, 1, 2, 1, 2, 1, 2],
-    [2, 1, 1, 0, 1, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2],
+    [2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 4, 1, 1, 2, 1, 2, 1, 2, 1, 2],
+    [2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2],
     [2, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2],
     [2, 1, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 1, 2],
-    [2, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
+    [2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 2],
     [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
 ]
 function countPoints(worldArray){
@@ -28,10 +28,10 @@ function countPoints(worldArray){
                 sum += 1
             }
             else if (worldArray[i][j] === 3) {
-                sum += 50
+                sum += 25
             }
             else if (worldArray[i][j] === 4) {
-                sum += 200
+                sum += 100
             }
             
         }
@@ -39,6 +39,7 @@ function countPoints(worldArray){
     return sum
 }
 var totalPoints = countPoints(world)
+console.log(totalPoints);
 //CHARACTERS
 var pacman = {
     x: 1,
@@ -68,6 +69,9 @@ var skullGhost = {
     name: 'skullghost',
     difficulty: 100
 }
+
+var ghostArray = [redGhost, tealGhost, yellowGhost, skullGhost]
+
 function displayWorld() {
     var output = ''
     for(var i =0; i<world.length; i++){
@@ -83,7 +87,10 @@ function displayWorld() {
                 output += "<div class='empty'></div>"
             }
             if(world[i][j] === 3){
-                output += "<div class='cherry'></div>"
+                output += "<div class='dollars'></div>"
+            }
+            if(world[i][j] === 4){
+                output += "<div class='treasure'></div>"
             }
         }
         output += "\n</div>"
@@ -124,7 +131,9 @@ var score = document.getElementById('score')
 function updateScore(val){
     var newScore = Number(score.innerText) + val;
     score.innerText = newScore;
-    //if the score === the total points available, launch Winner screen
+    if(newScore === totalPoints){
+        alert('YOU WIN')
+    }
 
     // console.log(score)
 }
@@ -304,6 +313,9 @@ function ghostMove(ghost){
         randomGhostMove(ghost);
     }
     displayGhost(ghost);
+    if (ghost.x === pacman.x && ghost.y === pacman.y){
+        alert('GAME OVER')
+    }
     return
 }
 
@@ -345,7 +357,12 @@ document.onkeydown = function(e){
     }
     else if (world[pacman.y][pacman.x] === 3){
         world[pacman.y][pacman.x] = 0;
-        updateScore(50);
+        updateScore(25);
+        displayWorld();
+    }
+    else if (world[pacman.y][pacman.x] === 4){
+        world[pacman.y][pacman.x] = 0;
+        updateScore(100);
         displayWorld();
     }
     // console.log(world[pacman.y][pacman.x])
@@ -365,16 +382,21 @@ document.onkeydown = function(e){
     // ghostMove(skullGhost);
     // displaySkullGhost();
 
-    ghostMove(redGhost);
+    // ghostMove(redGhost);
 
-    ghostMove(tealGhost);
+    // ghostMove(tealGhost);
 
-    ghostMove(yellowGhost);
+    // ghostMove(yellowGhost);
 
-    ghostMove(skullGhost);
+    // ghostMove(skullGhost);
 
     displayPacman();
 
+    // for (var i = 0; i < ghostArray.length; i++){
+    //     if(ghostArray[i].x === pacman.x && ghostArray[i].y === pacman.y){
+    //         alert('GAME OVER. Refresh to try again')
+    //     }
+    // }
 }
 
 

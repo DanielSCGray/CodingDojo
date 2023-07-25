@@ -34,8 +34,13 @@ body {
 .empty {
     background-color: black;
 }
-.cherry {
-    background-image: url(images/cherry.png);
+.dollars {
+    background-image: url(images/dollars.png);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.treasure {
+    background-image: url(images/treasure.png);
     background-position: center;
     background-repeat: no-repeat;
 }
