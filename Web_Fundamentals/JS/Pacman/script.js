@@ -41,8 +41,8 @@ function countPoints(worldArray){
     return sum
 }
 
-var totalPoints = countPoints(world)
-// var totalPoints = 2;
+// var totalPoints = countPoints(world)
+var totalPoints = 20;
 
 console.log(totalPoints);
 
@@ -52,7 +52,7 @@ var score = document.getElementById('score')
 function updateScore(val){
     var newScore = Number(score.innerText) + val;
     score.innerText = newScore;
-    if(newScore === totalPoints){
+    if(newScore >= totalPoints){
         winScreen.style.display = 'flex';
         clearInterval(redGhostMovement);
         clearInterval(tealGhostMovement);
@@ -129,23 +129,6 @@ function displayPacman(){
     document.getElementById('pacman').style.top = pacman.y*40+'px';
     document.getElementById('pacman').style.left = pacman.x*40+'px';
 }
-// ORIGINAL DISPLAY GHOST
-// function displayRedGhost(){
-//     document.getElementById('redghost').style.top = redGhost.y*40+'px';
-//     document.getElementById('redghost').style.left = redGhost.x*40+'px';
-// }
-// function displayTealGhost(){
-//     document.getElementById('tealghost').style.top = tealGhost.y*40+'px';
-//     document.getElementById('tealghost').style.left = tealGhost.x*40+'px';
-// }
-// function displayYellowGhost(){
-//     document.getElementById('yellowghost').style.top = yellowGhost.y*40+'px';
-//     document.getElementById('yellowghost').style.left = yellowGhost.x*40+'px';
-// }
-// function displaySkullGhost(){
-//     document.getElementById('skullghost').style.top = skullGhost.y*40+'px';
-//     document.getElementById('skullghost').style.left = skullGhost.x*40+'px';
-// }
 
 //REFACTORED DISPLAY GHOST NOW MODULAR
 function displayGhost(ghost){
@@ -159,7 +142,7 @@ var score = document.getElementById('score')
 function updateScore(val){
     var newScore = Number(score.innerText) + val;
     score.innerText = newScore;
-    if(newScore === totalPoints){
+    if(newScore >= totalPoints){
         winScreen.style.display = 'flex';
         clearInterval(redGhostMovement);
         clearInterval(tealGhostMovement);
@@ -191,7 +174,6 @@ function buildRandomDirections(){
     }
     return randomDirections
 }
-console.log(buildRandomDirections())
 
 function buildSmartDirections(ghost){
     var smartDirectionArray = []
@@ -328,76 +310,19 @@ function ghostMove(ghost){
     return
 }
 
+//SPEED SETTINGS
+var speedSetting = {
+    pacmanSpeed : 200,
+    ghostSpeed : 300
+}
 
-    var redGhostMovement = setInterval(ghostMove, 300, redGhost);
-    var tealGhostMovement = setInterval(ghostMove, 300, tealGhost);
-    var yellowGhostMovement = setInterval(ghostMove, 300, yellowGhost);
-    var skullGhostMovement = setInterval(ghostMove, 300, skullGhost);
-
-//PACMAN MOVEMENT ORIGINAL
-
-// document.onkeydown = function(e){
-//     console.log(e.key)
-//     if (e.key === 'ArrowDown') {
-//         document.getElementById('pacman').style.transform = 'rotate(90deg)'
-//         pacman.y++;
-//         if(world[pacman.y][pacman.x] === 2){
-//             pacman.y--
-//         }
-//     }
-//     else if (e.key === 'ArrowUp'){
-//         document.getElementById('pacman').style.transform = 'rotate(270deg)'
-//         pacman.y--
-//         if(world[pacman.y][pacman.x] === 2){
-//             pacman.y++
-//         }
-//     }
-//     else if (e.key === 'ArrowRight'){
-//         document.getElementById('pacman').style.transform = 'rotate(0deg)'
-//         pacman.x++
-//         if(world[pacman.y][pacman.x] === 2){
-//             pacman.x--
-//         }
-//     }
-//     else if (e.key === 'ArrowLeft'){
-//         document.getElementById('pacman').style.transform = 'rotate(180deg)'
-//         pacman.x--
-//         if(world[pacman.y][pacman.x] === 2){
-//             pacman.x++
-//         }
-//     }
-
-//     if (world[pacman.y][pacman.x] === 1){
-//         world[pacman.y][pacman.x] = 0;
-//         updateScore(1);
-//         displayWorld();
-//     }
-//     else if (world[pacman.y][pacman.x] === 3){
-//         world[pacman.y][pacman.x] = 0;
-//         updateScore(25);
-//         displayWorld();
-//     }
-//     else if (world[pacman.y][pacman.x] === 4){
-//         world[pacman.y][pacman.x] = 0;
-//         updateScore(100);
-//         displayWorld();
-//     }
+    var redGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, redGhost);
+    var tealGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, tealGhost);
+    var yellowGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, yellowGhost);
+    var skullGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, skullGhost);
 
 
-//     displayPacman();
-
-//     for (var i = 0; i < ghostArray.length; i++){
-//         var cycleGhost = ghostArray[i];
-//         if (cycleGhost.x === pacman.x && cycleGhost.y === pacman.y){
-//             gameOverScreen.style.display = 'flex';
-//             clearInterval(redGhostMovement);
-//             clearInterval(tealGhostMovement);
-//             clearInterval(yellowGhostMovement);
-//             clearInterval(skullGhostMovement);
-//         }
-//     }
-// }
-//PACMAN DIRECTION
+//PACMAN DIRECTION + PACMAN MOVEMENT
 
 var pacmanDirection = 'ArrowRight'
 
@@ -407,28 +332,28 @@ document.onkeydown = function(e){
         pacmanDirection = 'ArrowDown'
         document.getElementById('pacman').style.transform = 'rotate(90deg)'
         clearInterval(pacmanMovement);
-        pacmanMovement = setInterval(pacmanMove, 200, pacmanDirection);
+        pacmanMovement = setInterval(pacmanMove, speedSetting.pacmanSpeed, pacmanDirection);
         return
     }
     else if (e.key === 'ArrowUp'){
         pacmanDirection = 'ArrowUp'
         document.getElementById('pacman').style.transform = 'rotate(270deg)'
         clearInterval(pacmanMovement);
-        pacmanMovement = setInterval(pacmanMove, 200, pacmanDirection);
+        pacmanMovement = setInterval(pacmanMove, speedSetting.pacmanSpeed, pacmanDirection);
         return
     }
     else if (e.key === 'ArrowRight'){
         pacmanDirection = 'ArrowRight'
         document.getElementById('pacman').style.transform = 'rotate(0deg)'
         clearInterval(pacmanMovement);
-        pacmanMovement = setInterval(pacmanMove, 200, pacmanDirection);
+        pacmanMovement = setInterval(pacmanMove, speedSetting.pacmanSpeed, pacmanDirection);
         return
     }
     else if (e.key === 'ArrowLeft'){
         pacmanDirection = 'ArrowLeft'
         document.getElementById('pacman').style.transform = 'rotate(180deg)'
         clearInterval(pacmanMovement);
-        pacmanMovement = setInterval(pacmanMove, 200, pacmanDirection);
+        pacmanMovement = setInterval(pacmanMove, speedSetting.pacmanSpeed, pacmanDirection);
         return
     }
 }
@@ -490,5 +415,5 @@ function pacmanMove(arrowKey){
     }
 }
 
-var pacmanMovement = setInterval(pacmanMove, 200, pacmanDirection)
+var pacmanMovement = setInterval(pacmanMove, speedSetting.pacmanSpeed, pacmanDirection)
 
