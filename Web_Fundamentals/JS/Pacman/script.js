@@ -136,7 +136,7 @@ function updateScore(val){
     var newScore = Number(score.innerText) + val;
     score.innerText = newScore;
     if(newScore === totalPoints){
-        winScreen.style.display = 'block';
+        winScreen.style.display = 'flex';
         clearInterval(redGhostMovement);
         clearInterval(tealGhostMovement);
         clearInterval(yellowGhostMovement);
@@ -324,7 +324,7 @@ function ghostMove(ghost){
     }
     displayGhost(ghost);
     if (ghost.x === pacman.x && ghost.y === pacman.y){
-        gameOverScreen.style.display = 'block';
+        gameOverScreen.style.display = 'flex';
         clearInterval(redGhostMovement);
         clearInterval(tealGhostMovement);
         clearInterval(yellowGhostMovement);
@@ -409,7 +409,7 @@ document.onkeydown = function(e){
     for (var i = 0; i < ghostArray.length; i++){
         var cycleGhost = ghostArray[i];
         if (cycleGhost.x === pacman.x && cycleGhost.y === pacman.y){
-            gameOverScreen.style.display = 'block';
+            gameOverScreen.style.display = 'flex';
             clearInterval(redGhostMovement);
             clearInterval(tealGhostMovement);
             clearInterval(yellowGhostMovement);
