@@ -20,6 +20,8 @@ var world = [
     [2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 2],
     [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
 ]
+
+//SCOREBOARD AND WIN CONDITION
 function countPoints(worldArray){
     var sum = 0;
     for (var i = 0; i < worldArray.length; i++){
@@ -43,6 +45,26 @@ var totalPoints = countPoints(world)
 // var totalPoints = 2;
 
 console.log(totalPoints);
+
+var winScreen = document.getElementById('win-screen')
+
+var score = document.getElementById('score')
+function updateScore(val){
+    var newScore = Number(score.innerText) + val;
+    score.innerText = newScore;
+    if(newScore === totalPoints){
+        winScreen.style.display = 'flex';
+        clearInterval(redGhostMovement);
+        clearInterval(tealGhostMovement);
+        clearInterval(yellowGhostMovement);
+        clearInterval(skullGhostMovement);
+    }
+
+    // console.log(score)
+}
+
+
+
 //CHARACTERS
 var pacman = {
     x: 1,
@@ -74,6 +96,8 @@ var skullGhost = {
 }
 
 var ghostArray = [redGhost, tealGhost, yellowGhost, skullGhost]
+
+//DISPLAY FUNCTIONS
 
 function displayWorld() {
     var output = ''
@@ -154,35 +178,6 @@ displayGhost(yellowGhost);
 displayGhost(skullGhost);
 
 // GHOST MOVEMENT 
-// function ghostMoveRandom(){
-//     var directionArray = ['down', 'up', 'right', 'left']
-//     var direction = directionArray[Math.floor(Math.random()*4)]
-//     if (direction === 'down') {
-//         redGhost.y++;
-//         if(world[redGhost.y][redGhost.x] === 2){
-//             redGhost.y--
-//         }
-//     }
-//     if (direction === 'up') {
-//         redGhost.y--;
-//         if(world[redGhost.y][redGhost.x] === 2){
-//             redGhost.y++
-//         }
-//     }
-//     if (direction === 'right') {
-//         redGhost.x++;
-//         if(world[redGhost.y][redGhost.x] === 2){
-//             redGhost.x--
-//         }
-//     }
-//     if (direction === 'left') {
-//         redGhost.x--;
-//         if(world[redGhost.y][redGhost.x] === 2){
-//             redGhost.x++
-//         }
-//     }
-//     console.log('ghost moves ' + direction)
-// }
 
 function buildRandomDirections(){
     var directionArray = ['down', 'up', 'right', 'left']
@@ -333,31 +328,131 @@ function ghostMove(ghost){
     return
 }
 
+
+    var redGhostMovement = setInterval(ghostMove, 300, redGhost);
+    var tealGhostMovement = setInterval(ghostMove, 300, tealGhost);
+    var yellowGhostMovement = setInterval(ghostMove, 300, yellowGhost);
+    var skullGhostMovement = setInterval(ghostMove, 300, skullGhost);
+
+//PACMAN MOVEMENT ORIGINAL
+
+// document.onkeydown = function(e){
+//     console.log(e.key)
+//     if (e.key === 'ArrowDown') {
+//         document.getElementById('pacman').style.transform = 'rotate(90deg)'
+//         pacman.y++;
+//         if(world[pacman.y][pacman.x] === 2){
+//             pacman.y--
+//         }
+//     }
+//     else if (e.key === 'ArrowUp'){
+//         document.getElementById('pacman').style.transform = 'rotate(270deg)'
+//         pacman.y--
+//         if(world[pacman.y][pacman.x] === 2){
+//             pacman.y++
+//         }
+//     }
+//     else if (e.key === 'ArrowRight'){
+//         document.getElementById('pacman').style.transform = 'rotate(0deg)'
+//         pacman.x++
+//         if(world[pacman.y][pacman.x] === 2){
+//             pacman.x--
+//         }
+//     }
+//     else if (e.key === 'ArrowLeft'){
+//         document.getElementById('pacman').style.transform = 'rotate(180deg)'
+//         pacman.x--
+//         if(world[pacman.y][pacman.x] === 2){
+//             pacman.x++
+//         }
+//     }
+
+//     if (world[pacman.y][pacman.x] === 1){
+//         world[pacman.y][pacman.x] = 0;
+//         updateScore(1);
+//         displayWorld();
+//     }
+//     else if (world[pacman.y][pacman.x] === 3){
+//         world[pacman.y][pacman.x] = 0;
+//         updateScore(25);
+//         displayWorld();
+//     }
+//     else if (world[pacman.y][pacman.x] === 4){
+//         world[pacman.y][pacman.x] = 0;
+//         updateScore(100);
+//         displayWorld();
+//     }
+
+
+//     displayPacman();
+
+//     for (var i = 0; i < ghostArray.length; i++){
+//         var cycleGhost = ghostArray[i];
+//         if (cycleGhost.x === pacman.x && cycleGhost.y === pacman.y){
+//             gameOverScreen.style.display = 'flex';
+//             clearInterval(redGhostMovement);
+//             clearInterval(tealGhostMovement);
+//             clearInterval(yellowGhostMovement);
+//             clearInterval(skullGhostMovement);
+//         }
+//     }
+// }
+//PACMAN DIRECTION
+
+var pacmanDirection = 'ArrowRight'
+
 document.onkeydown = function(e){
     console.log(e.key)
     if (e.key === 'ArrowDown') {
+        pacmanDirection = 'ArrowDown'
         document.getElementById('pacman').style.transform = 'rotate(90deg)'
+        clearInterval(pacmanMovement);
+        pacmanMovement = setInterval(pacmanMove, 200, pacmanDirection);
+        return
+    }
+    else if (e.key === 'ArrowUp'){
+        pacmanDirection = 'ArrowUp'
+        document.getElementById('pacman').style.transform = 'rotate(270deg)'
+        clearInterval(pacmanMovement);
+        pacmanMovement = setInterval(pacmanMove, 200, pacmanDirection);
+        return
+    }
+    else if (e.key === 'ArrowRight'){
+        pacmanDirection = 'ArrowRight'
+        document.getElementById('pacman').style.transform = 'rotate(0deg)'
+        clearInterval(pacmanMovement);
+        pacmanMovement = setInterval(pacmanMove, 200, pacmanDirection);
+        return
+    }
+    else if (e.key === 'ArrowLeft'){
+        pacmanDirection = 'ArrowLeft'
+        document.getElementById('pacman').style.transform = 'rotate(180deg)'
+        clearInterval(pacmanMovement);
+        pacmanMovement = setInterval(pacmanMove, 200, pacmanDirection);
+        return
+    }
+}
+
+function pacmanMove(arrowKey){
+    if (arrowKey === 'ArrowDown') {
         pacman.y++;
         if(world[pacman.y][pacman.x] === 2){
             pacman.y--
         }
     }
-    else if (e.key === 'ArrowUp'){
-        document.getElementById('pacman').style.transform = 'rotate(270deg)'
+    else if (arrowKey === 'ArrowUp'){
         pacman.y--
         if(world[pacman.y][pacman.x] === 2){
             pacman.y++
         }
     }
-    else if (e.key === 'ArrowRight'){
-        document.getElementById('pacman').style.transform = 'rotate(0deg)'
+    else if (arrowKey === 'ArrowRight'){
         pacman.x++
         if(world[pacman.y][pacman.x] === 2){
             pacman.x--
         }
     }
-    else if (e.key === 'ArrowLeft'){
-        document.getElementById('pacman').style.transform = 'rotate(180deg)'
+    else if (arrowKey === 'ArrowLeft'){
         pacman.x--
         if(world[pacman.y][pacman.x] === 2){
             pacman.x++
@@ -379,30 +474,7 @@ document.onkeydown = function(e){
         updateScore(100);
         displayWorld();
     }
-    // console.log(world[pacman.y][pacman.x])
-    // console.log(pacman.y)
-    // ghostMoveRandom();
-    // smartGhostMove(redGhost);
-    // randomGhostMove(redGhost);
-    // ghostMove(redGhost);
-    // displayRedGhost();
 
-    // ghostMove(tealGhost);
-    // displayTealGhost();
-
-    // ghostMove(yellowGhost);
-    // displayYellowGhost();
-
-    // ghostMove(skullGhost);
-    // displaySkullGhost();
-
-    // ghostMove(redGhost);
-
-    // ghostMove(tealGhost);
-
-    // ghostMove(yellowGhost);
-
-    // ghostMove(skullGhost);
 
     displayPacman();
 
@@ -416,18 +488,7 @@ document.onkeydown = function(e){
             clearInterval(skullGhostMovement);
         }
     }
-
-
-    // for (var i = 0; i < ghostArray.length; i++){
-    //     if(ghostArray[i].x === pacman.x && ghostArray[i].y === pacman.y){
-    //         alert('GAME OVER. Refresh to try again')
-    //     }
-    // }
 }
 
-
-    // var redGhostMovement = setInterval(ghostMove, 500, redGhost);
-    // var tealGhostMovement = setInterval(ghostMove, 500, tealGhost);
-    // var yellowGhostMovement = setInterval(ghostMove, 500, yellowGhost);
-    // var skullGhostMovement = setInterval(ghostMove, 500, skullGhost);
+var pacmanMovement = setInterval(pacmanMove, 200, pacmanDirection)
 
