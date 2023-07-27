@@ -1,0 +1,25 @@
+body {
+    background-color: black;
+    color: aliceblue;
+}
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main {
+    width: 750px;
+    margin: 50px 100px;
+
+}
+.story-box {
+    width: 750;
+    display: flex;
+}
+.story-container {
+    width: 300px;
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

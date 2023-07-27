@@ -41,8 +41,8 @@ function countPoints(worldArray){
     return sum
 }
 
-// var totalPoints = countPoints(world)
-var totalPoints = 20;
+var totalPoints = countPoints(world)
+// var totalPoints = 10;
 
 console.log(totalPoints);
 
@@ -68,7 +68,8 @@ function updateScore(val){
 //CHARACTERS
 var pacman = {
     x: 1,
-    y: 1
+    y: 1,
+    alive : true
 }
 var redGhost = {
     x: 9,
@@ -136,6 +137,8 @@ function displayGhost(ghost){
     document.getElementById(ghost.name).style.left = ghost.x*40+'px';
 }
 
+//SCORE, WIN CONDITION, WIN SCREEN LAUNCH
+
 var winScreen = document.getElementById('win-screen')
 
 var score = document.getElementById('score')
@@ -160,7 +163,8 @@ displayGhost(tealGhost);
 displayGhost(yellowGhost);
 displayGhost(skullGhost);
 
-// GHOST MOVEMENT 
+// GHOST MOVEMENT : DIRECTION ARRAYS
+
 
 function buildRandomDirections(){
     var directionArray = ['down', 'up', 'right', 'left']
@@ -237,6 +241,8 @@ function buildSmartDirections(ghost){
     return smartDirectionArray;
 }
 
+// GHOST MOVEMENT FUNCTIONS
+
 function randomGhostMove(ghost){
     var directions = buildRandomDirections()
     for (var i =0; i<directions.length; i++){
@@ -289,6 +295,7 @@ function smartGhostMove(ghost){
         }
     }
 }
+
 var gameOverScreen = document.getElementById('game-over-screen')
 
 function ghostMove(ghost){
@@ -306,14 +313,15 @@ function ghostMove(ghost){
         clearInterval(tealGhostMovement);
         clearInterval(yellowGhostMovement);
         clearInterval(skullGhostMovement);
+        pacman.alive = false
     }
     return
 }
 
 //SPEED SETTINGS
 var speedSetting = {
-    pacmanSpeed : 200,
-    ghostSpeed : 300
+    pacmanSpeed : 150,
+    ghostSpeed : 225
 }
 
     var redGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, redGhost);
@@ -324,7 +332,7 @@ var speedSetting = {
 
 //PACMAN DIRECTION + PACMAN MOVEMENT
 
-var pacmanDirection = 'ArrowRight'
+var pacmanDirection = ''
 
 document.onkeydown = function(e){
     console.log(e.key)
@@ -384,22 +392,24 @@ function pacmanMove(arrowKey){
         }
     }
 
-    if (world[pacman.y][pacman.x] === 1){
-        world[pacman.y][pacman.x] = 0;
-        updateScore(1);
-        displayWorld();
+    if (pacman.alive){
+        if (world[pacman.y][pacman.x] === 1){
+            world[pacman.y][pacman.x] = 0;
+            updateScore(1);
+            displayWorld();
+        }
+        else if (world[pacman.y][pacman.x] === 3){
+            world[pacman.y][pacman.x] = 0;
+            updateScore(25);
+            displayWorld();
+        }
+        else if (world[pacman.y][pacman.x] === 4){
+            world[pacman.y][pacman.x] = 0;
+            updateScore(100);
+            displayWorld();
+        }
     }
-    else if (world[pacman.y][pacman.x] === 3){
-        world[pacman.y][pacman.x] = 0;
-        updateScore(25);
-        displayWorld();
-    }
-    else if (world[pacman.y][pacman.x] === 4){
-        world[pacman.y][pacman.x] = 0;
-        updateScore(100);
-        displayWorld();
-    }
-
+        
 
     displayPacman();
 
@@ -411,6 +421,7 @@ function pacmanMove(arrowKey){
             clearInterval(tealGhostMovement);
             clearInterval(yellowGhostMovement);
             clearInterval(skullGhostMovement);
+            pacman.alive = false
         }
     }
 }

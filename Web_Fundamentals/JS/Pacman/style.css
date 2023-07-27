@@ -106,18 +106,17 @@ body {
     height: 800px;
     width: 800px;
     background-color: black;
-    color: green;
+    color: rgb(230, 200, 31);
     font-family: fantasy;
-    font-size: 100pt;
     position: absolute;
     top: 0;
     left: 0;
     display: none;
-    /* flex-direction: column; */
+    flex-direction: column;
     align-items: center;
 }
 .end-game-text {
-    font-style: 100pt;
+    font-size: 50pt;
     margin: 0px;
 }
 .confetti {
