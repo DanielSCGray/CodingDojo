@@ -1,23 +1,23 @@
 var world = [
     [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-    [2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 2],
+    [2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 0],
     [2, 1, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 1, 2, 2, 1, 2],
     [2, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2],
     [2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2],
     [2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2],
     [2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 2, 2, 2, 2, 1, 2, 1, 2, 1, 2],
     [2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2],
-    [2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 0, 2, 1, 1, 1, 1, 1, 2],
+    [2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 0, 0, 2, 1, 1, 1, 1, 1, 2],
     [2, 1, 2, 1, 2, 1, 2, 1, 2, 0, 0, 0, 0, 2, 1, 2, 1, 2, 1, 2],
     [2, 1, 2, 1, 1, 1, 2, 1, 2, 2, 0, 2, 2, 2, 1, 2, 1, 2, 1, 2],
     [2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2],
     [2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 2],
     [2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 1, 1, 2, 1, 2],
-    [2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 4, 1, 1, 2, 1, 2, 1, 2, 1, 2],
+    [2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 3, 1, 1, 2, 1, 2, 1, 2, 1, 2],
     [2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2],
     [2, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2],
     [2, 1, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 1, 2],
-    [2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 2],
+    [2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 1, 3, 2],
     [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
 ]
 
@@ -137,6 +137,7 @@ function displayGhost(ghost){
     document.getElementById(ghost.name).style.left = ghost.x*40+'px';
 }
 
+
 //SCORE, WIN CONDITION, WIN SCREEN LAUNCH
 
 var winScreen = document.getElementById('win-screen')
@@ -237,7 +238,7 @@ function buildSmartDirections(ghost){
             }
         }
     }
-    console.log(smartDirectionArray)
+    // console.log(smartDirectionArray)
     return smartDirectionArray;
 }
 
@@ -248,22 +249,22 @@ function randomGhostMove(ghost){
     for (var i =0; i<directions.length; i++){
         if(directions[i] === 'down' && world[ghost.y+1][ghost.x] !== 2){
             ghost.y++;
-            console.log(ghost.name + ' randomly moves ' + directions[i])
+            // console.log(ghost.name + ' randomly moves ' + directions[i])
             return
         }
         else if(directions[i] === 'up' && world[ghost.y-1][ghost.x] !== 2){
             ghost.y--;
-            console.log(ghost.name + ' randomly moves ' + directions[i])
+            // console.log(ghost.name + ' randomly moves ' + directions[i])
             return
         }
         else if(directions[i] === 'right' && world[ghost.y][ghost.x+1] !== 2){
             ghost.x++;
-            console.log(ghost.name + ' randomly moves ' + directions[i])
+            // console.log(ghost.name + ' randomly moves ' + directions[i])
             return
         }
         else if(directions[i] === 'left' && world[ghost.y][ghost.x-1] !== 2){
             ghost.x--;
-            console.log(ghost.name + ' randomly moves ' + directions[i])
+            // console.log(ghost.name + ' randomly moves ' + directions[i])
             return
         }
     }
@@ -275,22 +276,22 @@ function smartGhostMove(ghost){
         var smartDirection = directionArr[i]
         if(smartDirection === 'down' && world[ghost.y+1][ghost.x] !== 2){
             ghost.y++;
-            console.log('SMART ghost moves ' + smartDirection)
+            // console.log('SMART ghost moves ' + smartDirection)
             return
         }
         else if(smartDirection === 'up' && world[ghost.y-1][ghost.x] !== 2){
             ghost.y--;
-            console.log('SMART ghost moves ' + smartDirection)
+            // console.log('SMART ghost moves ' + smartDirection)
             return
         }
         else if(smartDirection === 'right' && world[ghost.y][ghost.x+1] !== 2){
             ghost.x++;
-            console.log('SMART ghost moves ' + smartDirection)
+            // console.log('SMART ghost moves ' + smartDirection)
             return
         }
         else if(smartDirection === 'left' && world[ghost.y][ghost.x-1] !== 2){
             ghost.x--;
-            console.log('SMART ghost moves ' + smartDirection)
+            // console.log('SMART ghost moves ' + smartDirection)
             return
         }
     }
@@ -324,10 +325,10 @@ var speedSetting = {
     ghostSpeed : 225
 }
 
-    var redGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, redGhost);
-    var tealGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, tealGhost);
-    var yellowGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, yellowGhost);
-    var skullGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, skullGhost);
+    // var redGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, redGhost);
+    // var tealGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, tealGhost);
+    // var yellowGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, yellowGhost);
+    // var skullGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, skullGhost);
 
 
 //PACMAN DIRECTION + PACMAN MOVEMENT

@@ -65,4 +65,4 @@ function capitalization(strings) {
 }
 console.log(capitalization(strings1))
 
-//edabit leetcode "main 75" code wars has lvls 1-8
+//edabit leetcode "main 75" code wars has lvls 1-8                     
