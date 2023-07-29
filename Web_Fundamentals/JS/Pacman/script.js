@@ -325,10 +325,10 @@ var speedSetting = {
     ghostSpeed : 225
 }
 
-    // var redGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, redGhost);
-    // var tealGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, tealGhost);
-    // var yellowGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, yellowGhost);
-    // var skullGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, skullGhost);
+    var redGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, redGhost);
+    var tealGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, tealGhost);
+    var yellowGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, yellowGhost);
+    var skullGhostMovement = setInterval(ghostMove, speedSetting.ghostSpeed, skullGhost);
 
 
 //PACMAN DIRECTION + PACMAN MOVEMENT
